@@ -15,7 +15,8 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  const ip = req.headers['x-forwarded-for'].split(',')[0];;
+
+  const ip = req.headers['x-forwarded-for'].split(',')[0];
   const language = req.headers["accept-language"].split(',')[0];
   const software = req.headers["user-agent"].match(/\(([^)]+)\)/)[0].replace(/\(|\)/g, '');
   
@@ -23,7 +24,8 @@ app.get("/", function (req, res) {
     ipaddress: ip,
     language: language,
     software: software
- });
+  });
+
 });
 
 // listen for requests :)
