@@ -15,15 +15,17 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+
+  const ip = req.headers['x-forwarded-for'].split(',')[0];
   const language = req.headers["accept-language"].split(',')[0];
   const software = req.headers["user-agent"].match(/\(([^)]+)\)/)[0].replace(/\(|\)/g, '');
-
+  
   res.json({
     ipaddress: ip,
     language: language,
     software: software
   });
+
 });
 
 // listen for requests :)
